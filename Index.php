@@ -16,7 +16,7 @@
   </header>
 
   <form action="Redim.php" method="get">
-    <input class="myButton" type="submit" onclick="progress()" value="Redimensionner!">
+    <input class="myButton" type="submit" value="Redimensionner!"> <!-- Au clique sur le bouton, appel de la page Redim.php -->
   </form>
 
   <p id="info"></p>
