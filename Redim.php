@@ -3,8 +3,7 @@ require_once 'Classes/PHPExcel.php';
 
 //////////////// Créer Fichier Excel et Insertion/////////////////////////
 
-function createfil()
-{
+/*function createfil(){
     $excel = new PHPExcel();
 
     $excel->setActiveSheetIndex(0)
@@ -14,9 +13,9 @@ function createfil()
     $file = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
     $file->save('test.xlsx');
 }
-
+*/
 ///////////// Récupération données fichier Excel////////////////////
-$excelLoad = PHPExcel_IOFactory::load('test.xlsx');
+$excelLoad = PHPExcel_IOFactory::load('Config.xlsx');
 $excelLoad->setActiveSheetIndex(0);
 
 $i = 2;
@@ -33,7 +32,6 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) {
     $dir = $image;
     $files = glob($dir, GLOB_BRACE);
 
-    echo "test2";
 
 
     foreach ($files as $dir) {
@@ -57,10 +55,10 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) {
                 imagepng($img_mini, $file);
             }
         }
-        echo 'Images ' . $image . ' redimensionné ! <br>';
+        
     }
     $i++;
-    echo "test1";
+    echo 'Images redimensionné ! <br>';
 }
 
 /////////////////////////////////////////////////////////////
