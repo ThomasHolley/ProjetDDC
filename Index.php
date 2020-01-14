@@ -30,7 +30,7 @@
 
 </html>
 <script>
-  function progress(){
-    document.getElementById("info").innerHTML= "Images en cours de modification...";
+  function progress() {
+    document.getElementById("info").innerHTML = "Images en cours de modification...";
   }
-  </script>
+</script>
