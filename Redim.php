@@ -49,14 +49,14 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que
                     $img_new = imagecreate($x, $y); # création de la miniature
                     $img_mini = imagecreatetruecolor($x, $y)
                         or $img_mini = imagecreate($x, $y);    // copie de l'image, avec le redimensionnement.
-                    imagecopyresized($img_mini, $img_big, 0, 0, 0, 0, $x, $y, $size[0], $size[1]);
+                    imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $x, $y, $size[0], $size[1]);
                     imagejpeg($img_mini, $img);
                 } elseif ($size['mime'] == 'image/png') { # Images en PNG   
                     $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
                     $img_new = imagecreate($x, $y);   # création de la miniature
                     $img_mini = imagecreatetruecolor($x, $y)
                         or $img_mini = imagecreate($x, $y); // copie de l'image, avec le redimensionnement.
-                    imagecopyresized($img_mini, $img_big, 0, 0, 0, 0, $x, $y, $size[0], $size[1]);
+                        imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $x, $y, $size[0], $size[1]);
                     imagepng($img_mini, $img);
                 }
             }
