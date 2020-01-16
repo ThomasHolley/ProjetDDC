@@ -1,29 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
+  <head>
+    <title>Dealer De Coque - Redimensionnement Images</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="Index_css.css" />
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-<head>
-  <title>Dealer De Coque - Redimensionnement Images</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="Index_css.css" />
-</head>
+  </head>
 
-<body>
-  <header>
-    <img src="ddc_logo.jpg" alt="Italian Trulli" /><!-- Logo de Dealer De Coque -->
-  </header>
+  <body>
 
-  <fieldset>
-    <h1>Redimensionnement des Images</h1>
-    <form action="Redim.php" method="get">
-      <input class="myButton" type="submit" value="Redimensionner" />
-      <!-- Au clique sur le bouton, appel de la page Redim.php -->
-    </form>
-  </fieldset>
+  <div class="Message_acceuil">
+    <p>Bonjour Les Dealers</p><i style='font-size:100px' class='far'>&#xf118;</i>
 
-  <footer>
-    <p>© copyright - Holley Thomas</p>
-  </footer>
-</body>
+  </div>
+<div id="page">
+    <header>
+      <img
+        id="logo"
+        src="ddc_logo.jpg"
+        alt="Italian Trulli"
+      /><!-- Logo de Dealer De Coque -->
+
+      <a href="https://www.dealerdecoque.fr/fr/">
+        <img
+          src="Logo_store.png"
+          alt="HTML tutorial"
+          style="width:2%;"
+        /><!--Bouton vers la boutique -->
+      </a>
+    </header>
+    <hr />
+
+    <p>
+      Toutes les dimensions sont dans le fichier Excel :
+      "Config.xlsx". <br />
+      Le PDF avec les visuels est enregistré à la date du jour.
+    </p>
+    <fieldset>
+      <h1>Redimensionnement des Images</h1> 
+      <form action="Redim.php" method="get">
+        <input class="myButton" type="submit" value="Redimensionner" />
+        <!-- Au clique sur le bouton, appel de la page Redim.php -->
+      </form>
+
+      <button id="Button_visualiser" onclick="location.href='VisuDim.php'"" type="button">
+        Voir les dimensions</button>
+
+    </fieldset>
+
+    <footer>
+      <p>Tous droits reservés - Holley Thomas</p>
+    </footer>
+  </div>
+
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".Message_acceuil").fadeOut(3000, function(){
+      $("#page").fadeIn(1000);
+    });
+  })
+  </script>
+  </body>
+  
 
 </html>

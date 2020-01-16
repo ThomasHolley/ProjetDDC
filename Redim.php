@@ -40,8 +40,8 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule A du tableau alors x et y prennent pour valeur B et C
             $y = $excelLoad->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule B
             $x = $excelLoad->getActiveSheet()->getCell('C' . $i)->getValue(); //La variale largeur prend pour valeur la cellule C
-            $XPX = $x*3.5;
-            $YPX = $y*3.5;
+            $XPX = $x * 3.3;
+            $YPX = $y * 3.3;
             $pdf->AddPage(); //Ajout d'une page sur le PDF
             $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
 
@@ -53,14 +53,14 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que
                     $img_mini = imagecreatetruecolor($XPX, $YPX)
                         or $img_mini = imagecreate($XPX, $YPX);    // copie de l'image, avec le redimensionnement.
                     imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]);
-                    imagejpeg($img_mini, $img,100);
+                    imagejpeg($img_mini, $img, 100);
                 } elseif ($size['mime'] == 'image/png') { # Images en PNG
                     $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
                     $img_new = imagecreate($XPX, $YPX);   # création de la miniature
                     $img_mini = imagecreatetruecolor($XPX, $YPX)
                         or $img_mini = imagecreate($XPX, $YPX); // copie de l'image, avec le redimensionnement.
                     imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]);
-                    imagepng($img_mini, $img,9);
+                    imagepng($img_mini, $img, 9);
                 }
             }
             $pdf->Image($img); //Ajout de l'image sur le PDF
@@ -73,4 +73,4 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que
     $i++;
 }
 
-$pdf->Output('Commandes du ' . date("m.d.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("m.d.y") . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
