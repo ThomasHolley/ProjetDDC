@@ -36,41 +36,45 @@ fieldset {
   font-family: inherit;
   text-align: center;
   background-color: #2b2b2a;
-  color: #8c8163;
+  color: white;
 }
-#Button_visualiser{
-	box-shadow: inset 0px 5px 10px -5px #ffffff;
-	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-	background-color: #ededed;
-	border-radius: 20px;
-	display: inline-block;
-	cursor: pointer;
-	color: #777777;
-	font-family: inherit;
-	font-size: 13px;
-	padding: 5px 5px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #ffffff;
+
+#Button_visualiser {
+  box-shadow: inset 0px 5px 10px -5px #ffffff;
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  border-radius: 20px;
+  display: inline-block;
+  cursor: pointer;
+  color: #777777;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 5px 5px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
 }
-#page{
-	display: none;
+
+#page {
+  display: none;
 }
-.Message_acceuil{
-	font-size: 5em;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-family: inherit;
-	position: absolute;
-	background-color: #2b2b2a;
-	color: #ffff99;
-	width: 100%;
-	height: 100%;
+
+.Message_acceuil {
+  font-size: 5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: inherit;
+  position: absolute;
+  background-color: #2b2b2a;
+  color: white;
+  width: 100%;
+  height: 100%;
 }
+
 footer {
   font-family: inherit;
   font-size: small;
-  color: #8c8163;
+  color: white;
   text-align: center;
   padding: 10px;
   position: absolute;

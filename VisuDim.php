@@ -1,3 +1,6 @@
+<a id="bouton_retour" href="javascript:history.go(-1)">Retour</a>
+<link rel="stylesheet" type="text/css" href="VisuDim_css.css" />
+
 <?php
 require_once 'Classes/PHPExcel.php';
 
@@ -25,6 +28,5 @@ while ($excelLoad->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que
 }
 
 echo "</table>";
-
 
 ?>

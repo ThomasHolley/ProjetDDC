@@ -1,0 +1,25 @@
+tr{
+    color: white;
+  background-color: grey;
+text-align: center;
+
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+  }
+
+  #bouton_retour {
+    box-shadow: inset 0px 5px 10px -5px #ffffff;
+    background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+    background-color: #ededed;
+    border-radius: 20px;
+    display: inline-block;
+    cursor: pointer;
+    color: #777777;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 5px 5px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+  }
