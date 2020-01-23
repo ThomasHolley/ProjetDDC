@@ -28,7 +28,7 @@ $pdf = new PDF_BARCODE('p', 'mm', array(100, 240)); //creation d'un nouveau pdf 
 $i = 2; // i commence à la deuxième ligne du tableau excel
 while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
     $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule B
-    
+
     foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
         $img = $dir;
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"

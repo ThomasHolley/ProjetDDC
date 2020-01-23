@@ -9,17 +9,22 @@
   <h1>Ajouter Un Modèle de Téléphone</h1>
 
   <body>
-    <form action="ModifExcel.php" method="POST">
-      Téléphone:<br />
-      <input type="text" name="telephone"  />
-      <br /><br />
-      Hauteur :<br />
-      <input type="text" name="Hauteur" />
-      <br /><br />
-      Largeur :<br />
-      <input type="text" name="Largeur" />
-      <br /><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <fieldset>
+      <form action="ModifExcel.php" method="POST">
+        Téléphone:<br />
+        <input type="text" name="telephone" />
+        <br /><br />
+        Hauteur :<br />
+        <input type="text" name="Hauteur" />
+        <br /><br />
+        Largeur :<br />
+        <input type="text" name="Largeur" />
+        <br /><br />
+        <input type="submit" value="Submit" />  <button id="Button_visualiser" onclick="location.href='Index.html'"" type="button">
+            retour</button>
+      </form>    
+      <button id="Button_visualiser" onclick="location.href='DeletePhone.php'"" type="button">
+        Supprimer un Appareil</button>
+    </fieldset>
   </body>
 </html>
