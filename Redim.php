@@ -2,6 +2,7 @@
 ///////////// Redimensionnement des images ////////////////////
 require('fpdf_barcode.php');
 require 'vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 
@@ -18,17 +19,16 @@ function mb_strrev($str) // Fonction pour inversement des caractères
 
 ///////////////////////////////////////////////////////////////////////
 
-$inputFileName = 'Config.xlsx';
-$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
-$spreadsheet->setActiveSheetIndex(0); //La page Excel 0 est chargé
+$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
+$spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE);
 $pdf = new PDF_BARCODE('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 
 $i = 2; // i commence à la deuxième ligne du tableau excel
-while ($spreadsheet->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
-    $telephone = $spreadsheet->getActiveSheet()->getCell('A' . $i)->getValue(); //La variable telephone prend pour valeur la cellule B
-
+while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
+    $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule B
+    
     foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
         $img = $dir;
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
@@ -36,10 +36,10 @@ while ($spreadsheet->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant q
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
         if ($part[1] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
-            $y = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-            $x = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-            $YPX = $y * 4.1;
-            $XPX = $x * 4.1;
+            $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+            $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+            $YPX = $y * 4;
+            $XPX = $x * 4;
             $pdf->AddPage(); //Ajout d'une page sur le PDF
             $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
 
@@ -66,9 +66,9 @@ while ($spreadsheet->getActiveSheet()->getCell('A' . $i)->getValue()) { //Tant q
             $textinv = mb_strrev($part[1]); //Inversion du Modele de tel
             $textinv2 = mb_strrev($part[2]); //Inversion De la matiere du tel
             $pdf->Image($img); //Ajout de l'image sur le PDF
-            $pdf->Text(1, 230, $textinv); // Ajout du modele du tel sur le pdf
-            $pdf->Text(30, 230, $textinv2); // Ajout de la matiere du tel sur le pdf
-            $pdf->EAN13(5, 200, $textinv0, 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
+            $pdf->Text(30, 230, $part[1]); // Ajout du modele du tel sur le pdf
+            $pdf->Text(60, 230, $textinv2); // Ajout de la matiere du tel sur le pdf
+            $pdf->EAN13(30, 200, $textinv0, 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
         }
     }
     $i++;
