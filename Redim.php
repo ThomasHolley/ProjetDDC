@@ -42,33 +42,31 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
             $XPX = $x * 4;
             $pdf->AddPage(); //Ajout d'une page sur le PDF
             $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
+            
 
             if ($size) { //Si le fichier a une taille
                 if ($size['mime'] == 'image/jpeg') { # Images en JPEG
-                    $img_big = imagecreatefromjpeg($img); # On ouvre l'image d'origine
-                    $img_new = imagecreate($XPX, $YPX); # création de la miniature
-                    $img_mini = imagecreatetruecolor($XPX, $YPX)
-                        or $img_mini = imagecreate($XPX, $YPX);    // copie de l'image, avec de bonnes couleurs
-                    imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
-                    imageresolution($img_mini, 300);
-                    imagejpeg($img_mini, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
+                    $img_source = imagecreatefromjpeg($img); # On ouvre l'image d'origine
+                    $img_dest = imagecreatetruecolor($XPX, $YPX);
+                    imageresolution($img_dest, 300,300);
+                    imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                    imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
+
                 } elseif ($size['mime'] == 'image/png') { # Images en PNG
                     $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
-                    $img_new = imagecreate($XPX, $YPX);   # création de la miniature
-                    $img_mini = imagecreatetruecolor($XPX, $YPX)
-                        or $img_mini = imagecreate($XPX, $YPX); // copie de l'image, avec de bonnes couleurs.
+                    $img_mini = imagecreatetruecolor($XPX, $YPX);
                     imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
-                    imageresolution($img_mini, 300);
                     imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
                 }
             }
-            $textinv0 = mb_strrev($part[0]); //Inversion du codebar
-            $textinv = mb_strrev($part[1]); //Inversion du Modele de tel
-            $textinv2 = mb_strrev($part[2]); //Inversion De la matiere du tel
+            $inv0 = mb_strrev($part[0]);
+            $inv1 = mb_strrev($part[1]);
+            $inv2 = mb_strrev($part[2]);
+
             $pdf->Image($img); //Ajout de l'image sur le PDF
-            $pdf->Text(30, 230, $part[1]); // Ajout du modele du tel sur le pdf
-            $pdf->Text(60, 230, $textinv2); // Ajout de la matiere du tel sur le pdf
-            $pdf->EAN13(30, 200, $textinv0, 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
+            $pdf->Text(30, 230, $inv1); // Ajout du modele du tel sur le pdf
+            $pdf->Text(60, 230, $inv2); // Ajout de la matiere du tel sur le pdf
+            $pdf->EAN13(30, 200, $inv0, 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
         }
     }
     $i++;

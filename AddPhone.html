@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>Dealer De Coque - Redimensionnement Images</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
 
-  <h1>Ajouter Un Modèle de Téléphone</h1>
+<head>
+  <title>Dealer De Coque - Redimensionnement Images</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
 
-  <body>
-    <fieldset>
-      <form action="ModifExcel.php" method="POST">
-        Téléphone:<br />
-        <input type="text" name="telephone" />
-        <br /><br />
-        Hauteur :<br />
-        <input type="text" name="Hauteur" />
-        <br /><br />
-        Largeur :<br />
-        <input type="text" name="Largeur" />
-        <br /><br />
-        <input type="submit" value="Submit" />  <button id="Button_visualiser" onclick="location.href='Index.html'"" type="button">
-            retour</button>
-      </form>    
-      <button id="Button_visualiser" onclick="location.href='DeletePhone.php'"" type="button">
-        Supprimer un Appareil</button>
-    </fieldset>
-  </body>
+<h1>Ajouter Un Modèle de Téléphone</h1>
+
+<body>
+  <fieldset>
+    <form action="ModifExcel.php" method="POST">
+      Téléphone:<br />
+      <input type="text" name="telephone" />
+      <br /><br />
+      Hauteur :<br />
+      <input type="text" name="Hauteur" />
+      <br /><br />
+      Largeur :<br />
+      <input type="text" name="Largeur" />
+      <br /><br />
+      <input type="submit" value="Submit" /> <button id="Button_visualiser" onclick="location.href='Index.html'"" type="
+        button">
+        retour</button>
+    </form>
+    <br /><br />
+
+    <form action="DeletePhone.php" method="POST">
+
+      <button id="Button_visualiser" onclick="location.href='DeletePhone.php'"" type=" button">
+        Supprimer le dernier modèle</button>
+    </form>
+  </fieldset>
+</body>
+
 </html>
