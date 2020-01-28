@@ -36,15 +36,20 @@
     <fieldset>
       <h1>Redimensionnement des Images</h1>
 
-      <form action="Redim.php" method="get">
+     <!-- <form action="Redim.php">
         <input class="myButton" type="submit" value="Redimensionner" />
-        <!-- Au clique sur le bouton, appel de la page Redim.php -->
-      </form>
-
-      <button id="Button_visualiser" onclick="location.href='VisuDim.php'"" type=" button">
+              <button id="Button_visualiser" onclick="location.href='VisuDim.php'"" type=" button">
         Voir les dimensions</button>
       <button id="Button_visualiser" onclick="location.href='AddPhone.html'"" type=" button">
         Ajouter un Appareil</button>
+      </form>-->
+
+      <form action="upload.php" method="POST" multipart="" enctype="multipart/form-data">
+        <input type="file" name="images[]" multiple />
+        <input  type="submit"/>
+      </form>
+
+
     </fieldset>
 
     <footer>
