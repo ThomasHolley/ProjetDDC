@@ -11,7 +11,7 @@
 
 <body>
 
-    <form action="test1.php">
+    <form action="Redim.php">
         <button class="myButton" type="submit">Redimensionner</button>
     </form>
 

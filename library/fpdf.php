@@ -893,8 +893,8 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link='')
 	if($w==0 && $h==0)
 	{
 		// Put image at 96 dpi
-		$w = -96;
-		$h = -96;
+		$w = -300;
+		$h = -300;
 	}
 	if($w<0)
 		$w = -$info['w']*72/$w/$this->k;
