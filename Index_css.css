@@ -1,25 +1,9 @@
-.myButton {
-  box-shadow: inset 0px 5px 10px -5px #ffffff;
-  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-  background-color: #ededed;
-  border-radius: 20px;
-  display: inline-block;
-  cursor: pointer;
-  color: #777777;
-  font-family: Helvetica;
-  font-size: 19px;
-  font-weight: bold;
-  padding: 15px 30px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #ffffff;
-}
-.myButton:hover {
-  background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-  background-color: #dfdfdf;
-}
-.myButton:active {
-  position: relative;
-  top: 1px;
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  animation: transitionIn 0.75s;
 }
 
 header {
@@ -32,7 +16,25 @@ header {
   margin-right: auto;
 }
 
+.myButton {
+  width: 10%;
+  height: 20%;
+  border: none;
+  padding: 10px 10px 10px 10px;
+  border-radius: 8px;
+  background: white;
+  font: bold 13px Arial;
+  color: black;
+}
+
+#form {
+  background-color: #2b2b2a;
+  text-align: center;
+  padding: 5%;
+}
+
 fieldset {
+  padding: 3%;
   font-family: inherit;
   text-align: center;
   background-color: #2b2b2a;
@@ -53,24 +55,58 @@ fieldset {
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
 }
-
-#page {
-  display: none;
-}
-
-.Message_acceuil {
-  font-size: 5em;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-family: inherit;
-  position: absolute;
-  background-color: #2b2b2a;
-  color: white;
-  width: 100%;
+.sidenav {
   height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
 }
 
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+#text_info {
+  text-align: center;
+  margin: 1%;
+  padding: 3%;
+}
 footer {
   font-family: inherit;
   font-size: small;
@@ -82,4 +118,35 @@ footer {
   width: 100%;
   height: 60px; /* Height of the footer */
   background-color: #2b2b2a;
+}
+#Form_AddPhone {
+  padding: 5%;
+  font-family: inherit;
+  text-align: center;
+  background-color: #2b2b2a;
+  color: white;
+}
+
+#tab {
+  margin: auto;
+}
+tr {
+  color: white;
+  background-color: grey;
+  text-align: center;
+}
+td {
+  display: table-cell;
+  vertical-align: inherit;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
 }

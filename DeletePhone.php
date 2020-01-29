@@ -11,12 +11,11 @@ $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initi
 $sheet = $spreadsheet->getActiveSheet(0); //La feuille de travail Excel "0" est chargé
 $numb = $sheet->getHighestDataRow();
 
-        $sheet->removeRow($numb, 1);
-    
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('Config.xlsx');
+$sheet->removeRow($numb, 1);
+
+$writer = new Xlsx($spreadsheet);
+$writer->save('Config.xlsx');
 
 
 
-        echo ("Dernier Modèle supprimé");
-
+echo ("Dernier Modèle supprimé");

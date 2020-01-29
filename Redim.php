@@ -9,16 +9,7 @@ require_once('php_image_magician.php');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 
-///////////// Fonctions ////////////////////
 
-function mb_strrev($str) // Fonction pour inversement des caractères
-{
-    $r = '';
-    for ($i = mb_strlen($str); $i >= 0; $i--) {
-        $r .= mb_substr($str, $i, 1);
-    }
-    return $r;
-}
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -45,8 +36,8 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
             $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
             $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-            $YPX = $y * 14;
-            $XPX = $x * 14;
+            $YPX = $y * 14; //Calcul du ratio
+            $XPX = $x * 14; //Calcul du ratio
             $pdf->AddPage(); //Ajout d'une page sur le PDF
             $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
 
@@ -57,7 +48,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     $img_dest = imagecreatetruecolor($XPX, $YPX);
                     imageresolution($img_dest, 300, 300);
                     imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
-                    imagejpeg($img_dest, $img,100); // L'image est sauvegardé en JPEG avec une qualité de 100
+                    imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
 
 
                 } elseif ($size['mime'] == 'image/png') { # Images en PNG
@@ -74,17 +65,18 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
             $inv3 = mb_strrev($part[3]);
 
             $pdf->Image($img); //Ajout de l'image sur le PDF
-            $pdf->Text(5, 210, $inv0); // Ajout du modele du tel sur le pdf
-            $pdf->Text(7, 230, $inv1); // Ajout du modele du tel sur le pdf
-            $pdf->Text(75, 225, $inv2); // Ajout de la matiere du tel sur le pdf
-            $pdf->Text(80, 231, $inv3); // Ajout de la matiere du tel sur le pdf
-            $pdf->EAN13(30, 205, $part[1], 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
+            $pdf->Text(5, 210, $part[0]); // Ajout du CLIENT
+            $pdf->Text(7, 230, $part[1]); // Ajout du NUMERO DE COMMANDE
+            $pdf->Text(69, 225, $part[2]); // Ajout MODELE DE TELEPHONE
+            $pdf->Text(80, 231, $inv3); // Ajout de la MATIERE DE TELEPHONE
+            $pdf->UPC_A(30, 205, $part[1], 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
         }
     }
     $i++;
 }
-$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . " de " . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
+/// Supprime les fichiers du dossier Visuel
 $path = 'Visuel/'; //ne pas oublier le slash final
 $rep = opendir($path);
 //$i=0;
@@ -93,4 +85,15 @@ while ($file = readdir($rep)) {
         unlink($path . $file);
         //$i++;
     }
+}
+
+///////////// Fonctions ////////////////////
+
+function mb_strrev($str) // Fonction pour inversement des caractères
+{
+    $r = '';
+    for ($i = mb_strlen($str); $i >= 0; $i--) {
+        $r .= mb_substr($str, $i, 1);
+    }
+    return $r;
 }

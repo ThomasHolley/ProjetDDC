@@ -5,34 +5,60 @@
   <title>Dealer De Coque - Redimensionnement Images</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="Index_css.css" />
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="Index.html">Acceuil</a>
+  <a href="VisuDim.php">Dimensions</a>
+  <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
+  <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
+</div>
+</div>
+
+<div id="main">
 <h1>Ajouter Un Modèle de Téléphone</h1>
 
-<body>
-  <fieldset>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+
+  <fieldset id="Form_AddPhone">
+    
     <form action="ModifExcel.php" method="POST">
-      Téléphone:<br />
+      Téléphone:
       <input type="text" name="telephone" />
-      <br /><br />
-      Hauteur :<br />
+      
+      Hauteur :
       <input type="text" name="Hauteur" />
-      <br /><br />
-      Largeur :<br />
+      
+      Largeur :
       <input type="text" name="Largeur" />
       <br /><br />
-      <input type="submit" value="Submit" /> <button id="Button_visualiser" onclick="location.href='Index.html'"" type="
-        button">
-        retour</button>
+      <input type="submit" value="Envoyer" />
     </form>
-    <br /><br />
+   
 
-    <form action="DeletePhone.php" method="POST">
-
-      <button id="Button_visualiser" onclick="location.href='DeletePhone.php'"" type=" button">
-        Supprimer le dernier modèle</button>
-    </form>
   </fieldset>
+</div>
+
+
+<footer>
+  <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
+</footer>
 </body>
 
 </html>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+  </script>
