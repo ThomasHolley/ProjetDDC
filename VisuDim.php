@@ -12,7 +12,7 @@
 <body>
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="Index.html">Acceuil</a>
+    <a href="Index.html">Accueil</a>
     <a href="AddPhone.html">Ajouter un modèle</a>
     <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
     <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
@@ -27,7 +27,7 @@
     </header>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-
+<!------------------------------------------- PHP -------------------------------------------------------------------------->
     <?php
 require 'vendor/autoload.php';
 
@@ -57,16 +57,14 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 echo "</table>";
 
 ?>
-
+<!---------------------------------------------------------------------------------------------------------------------------------->
 </div>
 
-<footer>
-  <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
-</footer>
-</body>
 
+</body>
 </html>
-<script>
+<!--------------------------------------------- SCRIPT ------------------------------------------------------------------------------------->
+<script> //Script de Transition
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";

@@ -40,6 +40,9 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
             $XPX = $x * 14; //Calcul du ratio
             $pdf->AddPage(); //Ajout d'une page sur le PDF
             $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
+            $pdf->SetTextColor(107, 107, 71);
+
+
 
 
             if ($size) { //Si le fichier a une taille
@@ -48,6 +51,9 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     $img_dest = imagecreatetruecolor($XPX, $YPX);
                     imageresolution($img_dest, 300, 300);
                     imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                    imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                    $color = imagecolorallocate($img_dest, 107, 107, 71);
+                    drawBorder($img_dest,$color, 3);
                     imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
 
 
@@ -55,26 +61,26 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
                     $img_mini = imagecreatetruecolor($XPX, $YPX);
                     imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                    imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                    $color = imagecolorallocate($img_dest, 184, 184, 148);
+                    drawBorder($img_dest,$color, 3);
                     imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
 
                 }
             }
-            $inv0 = mb_strrev($part[0]);
-            $inv1 = mb_strrev($part[1]);
-            $inv2 = mb_strrev($part[2]);
-            $inv3 = mb_strrev($part[3]);
+
 
             $pdf->Image($img); //Ajout de l'image sur le PDF
-            $pdf->Text(5, 210, $part[0]); // Ajout du CLIENT
-            $pdf->Text(7, 230, $part[1]); // Ajout du NUMERO DE COMMANDE
-            $pdf->Text(69, 225, $part[2]); // Ajout MODELE DE TELEPHONE
-            $pdf->Text(80, 231, $inv3); // Ajout de la MATIERE DE TELEPHONE
+            $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
+            $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
+            $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+            $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
             $pdf->UPC_A(30, 205, $part[1], 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
         }
     }
     $i++;
 }
-$pdf->Output('Commandes du ' . date("d.m.y") . " de " . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . " de " . $part[0] . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
 
 /// Supprime les fichiers du dossier Visuel
 $path = 'Visuel/'; //ne pas oublier le slash final
@@ -87,13 +93,15 @@ while ($file = readdir($rep)) {
     }
 }
 
-///////////// Fonctions ////////////////////
-
-function mb_strrev($str) // Fonction pour inversement des caractères
+function drawBorder(&$img, &$color, $thickness = 1) 
 {
-    $r = '';
-    for ($i = mb_strlen($str); $i >= 0; $i--) {
-        $r .= mb_substr($str, $i, 1);
-    }
-    return $r;
+    $x1 = 0; 
+    $y1 = 0; 
+    $x2 = ImageSX($img) - 1; 
+    $y2 = ImageSY($img) - 1; 
+
+    for($i = 0; $i < $thickness; $i++) 
+    { 
+        ImageRectangle($img, $x1++, $y1++, $x2--, $y2--, $color); 
+    } 
 }

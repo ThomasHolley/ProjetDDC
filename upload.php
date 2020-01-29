@@ -12,7 +12,7 @@
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="Index.html">Acceuil</a>
+        <a href="Index.html">Accueil</a>
         <a href="AddPhone.html">Ajouter un modèle</a>
         <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
         <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
@@ -31,12 +31,13 @@
             <button class="myButton" type="submit">Redimensionner</button>
         </form>
     </div>
-        <footer>
-    <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
-  </footer>
+    <footer>
+        <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
+    </footer>
 </body>
 
 </html>
+<!--------------------------------------------- SCRIPT -------------------------------------------------------------------------->
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -48,6 +49,7 @@
         document.getElementById("main").style.marginLeft = "0";
     }
 </script>
+<!--------------------------------------------- PHP ------------------------------------------------------------------------->
 <?php
 
 extract($_POST);
