@@ -43,8 +43,6 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
             $pdf->SetTextColor(107, 107, 71);
 
 
-
-
             if ($size) { //Si le fichier a une taille
                 if ($size['mime'] == 'image/jpeg') { # Images en JPEG
                     $img_source = imagecreatefromjpeg($img); # On ouvre l'image d'origine
@@ -63,7 +61,6 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
                     imageflip($img_dest, IMG_FLIP_HORIZONTAL);
                     $color = imagecolorallocate($img_dest, 184, 184, 148);
-                    drawBorder($img_dest,$color, 3);
                     imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
 
                 }
@@ -75,12 +72,12 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
             $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
             $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
             $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
-            $pdf->UPC_A(30, 205, $part[1], 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
+            $pdf->EAN13(30, 205, $part[1], 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
         }
     }
     $i++;
 }
-$pdf->Output('Commandes du ' . date("d.m.y") . " de " . $part[0] . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . " de " . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 /// Supprime les fichiers du dossier Visuel
 $path = 'Visuel/'; //ne pas oublier le slash final

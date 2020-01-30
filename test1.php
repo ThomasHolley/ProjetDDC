@@ -1,22 +1,16 @@
 <?php
 ///////////// Redimensionnement des images ////////////////////
-require('fpdf_barcode.php');
+
 require 'vendor/autoload.php';
 require_once('php_image_magician.php');
+require('code39.php');
+
+
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 
-///////////// Fonctions ////////////////////
 
-function mb_strrev($str) // Fonction pour inversement des caractères
-{
-    $r = '';
-    for ($i = mb_strlen($str); $i >= 0; $i--) {
-        $r .= mb_substr($str, $i, 1);
-    }
-    return $r;
-}
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -25,8 +19,9 @@ $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est char
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE);
 
-$pdf = new PDF_BARCODE('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
+$pdf = new PDF_Code39('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 $pdf->SetCompression(0);
+
 
 
 $i = 2; // i commence à la deuxième ligne du tableau excel
@@ -40,36 +35,87 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
-            $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-            $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-            $YPX = $y * 4;
-            $XPX = $x * 4;
-            $pdf->AddPage(); //Ajout d'une page sur le PDF
-            $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
+            if ($telephone == 'MUG') {
+                $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+                $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+                $YPX = $y * 10; //Calcul du ratio
+                $XPX = $x * 10; //Calcul du ratio
+                $pdf->AddPage(); //Ajout d'une page sur le PDF
 
 
 
-            $magicianobj = new imageLib($img);
-            $magicianobj->resizeImage($XPX, $YPX, 'crop');
-            $magicianobj->addBorder(2, '#000000');
-            $magicianobj->saveImage($img, 100);
+                if ($size) { //Si le fichier a une taille
+                    if ($size['mime'] == 'image/jpeg') { # Images en JPEG
+                        $img_source = imagecreatefromjpeg($img); # On ouvre l'image d'origine
+                        $img_dest = imagecreatetruecolor($XPX, $YPX);
+                        imageresolution($img_dest, 300, 300);
+                        imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                        imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                        imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
 
-            $inv0 = mb_strrev($part[0]);
-            $inv1 = mb_strrev($part[1]);
-            $inv2 = mb_strrev($part[2]);
-            $inv3 = mb_strrev($part[3]);
 
-            $pdf->Image($img); //Ajout de l'image sur le PDF
-            $pdf->Text(10, 230, $inv0); // Ajout du modele du tel sur le pdf
-            $pdf->Text(20, 230, $inv1); // Ajout du modele du tel sur le pdf
-            $pdf->Text(55, 225, $inv2); // Ajout de la matiere du tel sur le pdf
-            $pdf->Text(60, 231, $inv3); // Ajout de la matiere du tel sur le pdf
-            $pdf->UPC_A(30, 190, $inv1, 20, 0.35, 10); // Ajout d'un code bar du numéro du produit.
+                    } elseif ($size['mime'] == 'image/png') { # Images en PNG
+                        $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
+                        $img_mini = imagecreatetruecolor($XPX, $YPX);
+                        imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                        imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                        imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
+
+                    }
+                }
+                $pdf->Image($img, 10, 20); //Ajout de l'image sur le PDF
+            }
+
+            if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
+                if ($telephone != 'MUG') {
+                    $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+                    $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+                    $YPX = $y * 14; //Calcul du ratio
+                    $XPX = $x * 14; //Calcul du ratio
+                    $pdf->AddPage(); //Ajout d'une page sur le PDF
+                    $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
+                    $pdf->SetTextColor(107, 107, 71);
+
+
+                    if ($size) { //Si le fichier a une taille
+                        if ($size['mime'] == 'image/jpeg') { # Images en JPEG
+                            $img_source = imagecreatefromjpeg($img); # On ouvre l'image d'origine
+                            $img_dest = imagecreatetruecolor($XPX, $YPX);
+                            imageresolution($img_dest, 300, 300);
+                            imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                            imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                            $color = imagecolorallocate($img_dest, 107, 107, 71);
+                            drawBorder($img_dest, $color, 3);
+                            imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
+
+
+                        } elseif ($size['mime'] == 'image/png') { # Images en PNG
+                            $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
+                            $img_mini = imagecreatetruecolor($XPX, $YPX);
+                            imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                            imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                            imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
+
+                        }
+                    }
+
+
+                    $pdf->Image($img,15); //Ajout de l'image sur le PDF
+                    $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
+                    $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
+                    $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+                    $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
+                    $pdf->Code39(30, 205,135545); // Ajout d'un code bar du numéro du produit.
+
+                }
+            }
         }
     }
     $i++;
 }
 $pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+
+/// Supprime les fichiers du dossier Visuel
 $path = 'Visuel/'; //ne pas oublier le slash final
 $rep = opendir($path);
 //$i=0;
@@ -77,5 +123,17 @@ while ($file = readdir($rep)) {
     if ($file != '..' && $file != '.' && $file != '' && $file != '.htaccess') {
         unlink($path . $file);
         //$i++;
+    }
+}
+
+function drawBorder(&$img, &$color, $thickness = 1)
+{
+    $x1 = 0;
+    $y1 = 0;
+    $x2 = ImageSX($img) - 1;
+    $y2 = ImageSY($img) - 1;
+
+    for ($i = 0; $i < $thickness; $i++) {
+        ImageRectangle($img, $x1++, $y1++, $x2--, $y2--, $color);
     }
 }
