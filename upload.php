@@ -5,7 +5,7 @@
     <title>Dealer De Coque - Redimensionnement Images</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="Index_css.css" />
+    <link rel="stylesheet" type="text/css" href="master_css.css" />
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 
@@ -27,7 +27,7 @@
 
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
-        <form action="test1.php" id="form">
+        <form action="Redim.php" id="form">
             <button class="myButton" type="submit">Redimensionner</button>
         </form>
     </div>

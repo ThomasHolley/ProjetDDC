@@ -19,6 +19,9 @@ $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est char
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE);
 
+
+
+
 $pdf = new PDF_Code39('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 $pdf->SetCompression(0);
 
@@ -28,7 +31,9 @@ $i = 2; // i commence à la deuxième ligne du tableau excel
 while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
     $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule B
 
+
     foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
+
         $img = $dir;
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
         $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
@@ -53,13 +58,6 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                         imageflip($img_dest, IMG_FLIP_HORIZONTAL);
                         imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
 
-
-                    } elseif ($size['mime'] == 'image/png') { # Images en PNG
-                        $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
-                        $img_mini = imagecreatetruecolor($XPX, $YPX);
-                        imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
-                        imageflip($img_dest, IMG_FLIP_HORIZONTAL);
-                        imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
 
                     }
                 }
@@ -89,23 +87,15 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                             imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
 
 
-                        } elseif ($size['mime'] == 'image/png') { # Images en PNG
-                            $img_big = imagecreatefrompng($img); # On ouvre l'image d'origine
-                            $img_mini = imagecreatetruecolor($XPX, $YPX);
-                            imagecopyresampled($img_mini, $img_big, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
-                            imageflip($img_dest, IMG_FLIP_HORIZONTAL);
-                            imagepng($img_mini, $img, 9); // L'image est sauvegardé en PNG avec une qualité au maximum
-
                         }
                     }
 
-
-                    $pdf->Image($img,15); //Ajout de l'image sur le PDF
+                    $pdf->Image($img); //Ajout de l'image sur le PDF
                     $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
                     $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
                     $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                     $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
-                    $pdf->Code39(30, 205,135545); // Ajout d'un code bar du numéro du produit.
+                    $pdf->Code39(30, 205, 135545); // Ajout d'un code bar du numéro du produit.
 
                 }
             }
