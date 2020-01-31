@@ -13,6 +13,7 @@ $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est char
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE); //files = fichiers dans le dossier
 
+
 $pdf = new PDF_Code39('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 
 $i = 2; // i commence à la deuxième ligne du tableau excel
@@ -25,11 +26,12 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
         $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
+
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
             if ($telephone == 'MUG') { // Si l'image est un MUG on continue
                 $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                 $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-                $YPX = $y * 11; //Calcul du ratio pour les mugs
+                $YPX = $y * 12.5; //Calcul du ratio pour les mugs
                 $XPX = $x * 11; //Calcul du ratio pour les mugs
                 $pdf->AddPage(); //Ajout d'une page sur le PDF
 
@@ -45,7 +47,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                         imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                     }
                 }
-                $pdf->Image($img, 5.8, 20); //Ajout de l'image sur le PDF
+                $pdf->Image($img,5,8); //Ajout de l'image sur le PDF
             }
 
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
@@ -75,12 +77,12 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     }
 
                     //////////////////////////////Ajout sur le PDF des éléments //////////////////////////////////////////////
-                    $pdf->Image($img, 15); //Ajout de l'image sur le PDF
+                    $pdf->Image($img,3,5); //Ajout de l'image sur le PDF
                     $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
                     $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
                     $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                     $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
-                    $pdf->Code39(30, 205, 135545); // Ajout du CODE BARRE
+                    $pdf->Code39(30, 205, $part[1]); // Ajout du CODE BARRE
 
                 }
             }
@@ -88,7 +90,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
     }
     $i++;
 }
-$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . " de ". $part[0].'.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
 
 /// Supprime les fichiers du dossier Visuel
 $path = 'Visuel/'; //ne pas oublier le slash final

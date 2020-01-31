@@ -2,7 +2,6 @@
 ///////////// Redimensionnement des images ////////////////////
 
 require 'vendor/autoload.php';
-require_once('php_image_magician.php');
 require('code39.php');
 
 
@@ -95,7 +94,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
                     $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                     $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
-                    $pdf->Code39(30, 205, 135545); // Ajout d'un code bar du numéro du produit.
+                    $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 
                 }
             }
@@ -106,6 +105,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 $pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
 
 /// Supprime les fichiers du dossier Visuel
+
 $path = 'Visuel/'; //ne pas oublier le slash final
 $rep = opendir($path);
 //$i=0;
