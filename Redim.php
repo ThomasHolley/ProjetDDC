@@ -25,10 +25,13 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
         $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
+        $modele = array();
+        array_push($modele,$img);
+        sort($modele);
 
 
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
-            if ($telephone == 'MUG') { // Si l'image est un MUG on continue
+            if ($telephone == 'MUG') { // Si l'image est un MUG on continue       MC-1234-MUG-.jpg
                 $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                 $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
                 $YPX = $y * 12.5; //Calcul du ratio pour les mugs
@@ -52,6 +55,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                 if ($telephone != 'MUG') { //Si le modele n'est pas un MUG on continue
+
                     $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                     $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
                     $YPX = $y * 14; //Calcul du ratio

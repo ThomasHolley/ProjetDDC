@@ -30,6 +30,7 @@
         <form action="Redim.php" id="form">
             <button class="myButton" type="submit">Redimensionner</button>
         </form>
+        <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button>
     </div>
     <footer>
         <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
