@@ -27,7 +27,7 @@
 
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
-        <form action="test.php" id="form">
+        <form action="Redim.php" id="form">
             <button class="myButton" type="submit">Redimensionner</button>
         </form>
         <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button>

@@ -1,12 +1,12 @@
 <?php
-///////////// Redimensionnement des images ////////////////////
+/////////////////////////////////////////////////////////////// Redimensionnement des images ////////////////////
 
 require 'vendor/autoload.php';
 require('code39.php');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-////////////////////////// Déclaration de Variables /////////////////////////////////////////////
+///////////////////////////////////////////////////////////////// Déclaration de Variables /////////////////////////////////////////////
 
 $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
 $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
@@ -22,18 +22,20 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 
     foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
         $img = $dir;
-        $img = strtoupper($img);
+        $img = strtoupper($img); // Met le nom des images en majuscules
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
         $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
+        $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC      
+        $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
-        ///////////////////////////////////////////////////////////////////// Redimensionnement des MUG /////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////// Redimensionnement des MUG /////////////////////////////////////////////////////////////////////////
 
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
             if ($telephone == 'MUG') {
                 $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                 $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-                $YPX = $y * 12.5; //Calcul du ratio
+                $YPX = $y * 12.5; //Calcul du ratio MUG
                 $XPX = $x * 11; //Calcul du ratio
                 $pdf->AddPage(); //Ajout d'une page sur le PDF
                 if ($size) { //Si le fichier a une taille
@@ -44,19 +46,19 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                         imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
                         imageflip($img_dest, IMG_FLIP_HORIZONTAL);
                         imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
-                    }
-                }
-                $pdf->Image($img, 10, 20); //Ajout de l'image sur le PDF
-            }
+                    } //EndIfImage
+                } //EndInfSize
+                $pdf->Image($img, 5, 8); //Ajout de l'image sur le PDF
+            } //EndIfMUG
 
-            /////////////////////////////////////////////////////////////// Redimensionnement des Coques ///////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////// Redimensionnement des Coques ///////////////////////////////////////////////////////
 
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                 if ($telephone != 'MUG') {
                     if ($telephone != "POP") {
                         $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                         $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-                        $YPX = $y * 14; //Calcul du ratio
+                        $YPX = $y * 14; //Calcul du ratio Tel
                         $XPX = $x * 14; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
                         $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
@@ -71,8 +73,8 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                                 $color = imagecolorallocate($img_dest, 107, 107, 71);
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
-                            }
-                        }
+                            } //EndIfImage
+                        } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
                         $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
@@ -80,16 +82,16 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 
-                    }
-                }
+                    } //EndIfNotPOP
+                } //EndIfNotMUG
 
-                /////////////////////////////////////////////////////////////// Redimensionnement des POP ///////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////////// Redimensionnement des POP ///////////////////////////////////////////////////////////
 
                 if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                     if ($telephone == 'POPSOCKET') {
                         $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                         $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
-                        $YPX = $y * 12.5; //Calcul du ratio
+                        $YPX = $y * 12.5; //Calcul du ratio POP
                         $XPX = $x * 12.5; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
                         $pdf->SetFont('Arial', '', 12); // Paramètrage de la police d'écriture
@@ -104,24 +106,26 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                                 $color = imagecolorallocate($img_dest, 107, 107, 71);
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
-                            }
-                        }
+                            } //EndIfImage
+                        } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
                         $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
                         $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
-                    }
-                }
+                    } //EndIfPOP
+                } //EndIfPartTelPOP
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            }
-        }
-    }
+            } //EndIfPartTel
+        } //EndIfPArtTelMUG
+    } //EndForEach
     $i++;
-}
+} //EndWhile
 
 $pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+
+
 
 ///////////////////// Supprime les fichiers du dossier Visuel ///////////////////////////////
 $path = 'Visuel/'; //ne pas oublier le slash final
