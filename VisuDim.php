@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="Index.html">Accueil</a>
     <a href="AddPhone.html">Ajouter un modèle</a>
@@ -27,44 +27,47 @@
     </header>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-<!------------------------------------------- PHP -------------------------------------------------------------------------->
+    <!------------------------------------------- PHP -------------------------------------------------------------------------->
     <?php
-require 'vendor/autoload.php';
+    require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
-$spreadsheet->setActiveSheetIndex(0);
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
+    $spreadsheet->setActiveSheetIndex(0);
 
-echo "<table border=1>";
-$i = 1; // i commence à la deuxième ligne du tableau excel
-while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
+    echo "<table border=1>";
+    $i = 1; // i commence à la deuxième ligne du tableau excel
+    while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
+      $spreadsheet->getActiveSheet()->getStyle('B'.$i)
+        ->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
+      $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule A
+      $hauteur = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule B
+      $largeur = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule C     
 
-    $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule A
-    $hauteur = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule B
-    $largeur = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule C     
-
-    echo "
+      echo "
         <tr>
             <td>" . $telephone . "</td>
             <td>" . $hauteur . "</td>
             <td>" . $largeur . "</td>
         </tr>
     ";
-    $i++;
-}
+      $i++;
+    }
 
-echo "</table>";
+    echo "</table>";
 
-?>
-<!---------------------------------------------------------------------------------------------------------------------------------->
-</div>
+    ?>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+  </div>
 
 
 </body>
+
 </html>
 <!--------------------------------------------- SCRIPT ------------------------------------------------------------------------------------->
-<script> //Script de Transition
+<script>
+  //Script de Transition
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
@@ -75,8 +78,3 @@ echo "</table>";
     document.getElementById("main").style.marginLeft = "0";
   }
 </script>
-
-
-
-
-

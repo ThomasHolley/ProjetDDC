@@ -28,7 +28,8 @@
     <fieldset id="Form_AddPhone">
 
       <form action="ModifExcel.php" method="POST">
-       <!-- <select>
+        <select name="Marque">
+          <option value="">----Marque----</option>
           <option value="ARCHOS">Archos</option>
           <option value="ALCATEL">Alcatel</option>
           <option value="ASUS">Asus</option>
@@ -56,7 +57,7 @@
           <option value="WILEYFOX">Wileyfox</option>
           <option value="XIAOMI">Xiaomi</option>
           <option value="ZTE">ZTE</option>
-        </select>-->
+        </select>
 
         Téléphone:
         <input type="text" name="telephone" />
@@ -72,12 +73,16 @@
     </fieldset>
   </div>
 
-<p id="Info_AddPhone">La Hauteur et la largeur sont en mm.<br/>Écrire le modèle de téléphone en Majuscule.</p>
+  <p id="Info_AddPhone">
+    La Hauteur et la largeur sont en mm.<br />
+    Le téléphone sera ajouté à la fin du fichier Excel.
+  </p>
 
   <footer>
     <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
   </footer>
 </body>
+
 </html>
 <!-------------------------------------------- SCRIPT ---------------------------------------------------------------------->
 <script>

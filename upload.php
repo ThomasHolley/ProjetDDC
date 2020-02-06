@@ -26,10 +26,12 @@
         </header>
 
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-
-        <form action="Redim.php" id="form">
-            <button class="myButton" type="submit">Redimensionner</button>
+<fieldset id="form_upload">
+        <form action="test.php" id="form">
+            <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button><br>
+            <span id="span_txt" style="display:none;"><img src="Iphoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
         </form>
+        </fieldset>
         <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button>
     </div>
     <footer>
@@ -48,6 +50,15 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
+    }
+
+    function toggle_text() {
+        var span = document.getElementById("span_txt");
+        if (span.style.display == "none") {
+            span.style.display = "inline";
+        } else {
+            span.style.display = "none";
+        }
     }
 </script>
 <!--------------------------------------------- PHP ------------------------------------------------------------------------->

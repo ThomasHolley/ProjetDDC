@@ -25,9 +25,11 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
         $img = strtoupper($img); // Met le nom des images en majuscules
         $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
         $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
-        $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC      
+        $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC   
+        $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
         $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
         $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
+        $tab = array();
 
         ////////////////////////////////////////////////////////////////////////////////////// Redimensionnement des MUG /////////////////////////////////////////////////////////////////////////
 
@@ -49,13 +51,20 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                     } //EndIfImage
                 } //EndInfSize
                 $pdf->Image($img, 5, 8); //Ajout de l'image sur le PDF
+                $pdf->AddPage();
+                $pdf->SetFont('Arial', '', 20); // Paramètrage de la police d'écriture
+                $pdf->SetTextColor(107, 107, 71);
+                $pdf->Image($img,0,0,30,60);
+                $pdf->Text(15, 130, $part[0]); // Ajout du CLIENT
+                $pdf->Text(40, 130, $part[2]); // Ajout MODELE DE TELEPHONE
+                $pdf->Code39(25, 100, $part[1]); // Ajout d'un code bar du numéro du produit.
             } //EndIfMUG
-
+            array_push($tab,$img);
             //////////////////////////////////////////////////////////////////////////// Redimensionnement des Coques ///////////////////////////////////////////////////////
 
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                 if ($telephone != 'MUG') {
-                    if ($telephone != "POP") {
+                    if ($telephone != "POPSOCKET") {
                         $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
                         $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
                         $YPX = $y * 14; //Calcul du ratio Tel
@@ -84,7 +93,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 
                     } //EndIfNotPOP
                 } //EndIfNotMUG
-
+                array_push($tab,$img);
                 ////////////////////////////////////////////////////////////////////////// Redimensionnement des POP ///////////////////////////////////////////////////////////
 
                 if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
@@ -114,6 +123,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                         $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
+
                     } //EndIfPOP
                 } //EndIfPartTelPOP
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +133,9 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
     $i++;
 } //EndWhile
 
-$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+
+sort($tab);
+$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 
 
