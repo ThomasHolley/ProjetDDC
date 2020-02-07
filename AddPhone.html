@@ -60,7 +60,7 @@
         </select>
 
         Téléphone:
-        <input type="text" name="telephone" />
+        <input type="text" id="modeleTel" name="telephone" onchange="myFunction()"/>
 
         Hauteur :
         <input type="text" name="Hauteur" />
@@ -68,10 +68,11 @@
         Largeur :
         <input type="text" name="Largeur" />
         <br /><br />
-        <input type="submit" value="Envoyer" />
+
+        <input type="submit" value="Envoyer"/>
       </form>
     </fieldset>
-  </div>
+
 
   <p id="Info_AddPhone">
     La Hauteur et la largeur sont en mm.<br />
@@ -79,8 +80,9 @@
   </p>
 
   <footer>
-    <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
+    <p>Tous droits reservés - Thomas Holley</p>
   </footer>
+</div>
 </body>
 
 </html>
@@ -95,4 +97,8 @@
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
+  function myFunction() {
+  var x = document.getElementById("modeleTel");
+  x.value = x.value.toUpperCase();
+}
 </script>

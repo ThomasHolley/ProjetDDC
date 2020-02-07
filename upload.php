@@ -36,10 +36,11 @@
         </fieldset>
 
 
-    </div>
+
     <footer>
-        <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
+        <p>Tous droits reservés - Thomas Holley</p>
     </footer>
+    </div>
 </body>
 
 </html>

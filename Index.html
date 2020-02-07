@@ -35,22 +35,22 @@
     <fieldset>
       <h1>Redimensionnement des Images</h1>
       <form action="upload.php" method="POST" multipart="" enctype="multipart/form-data">
-        <input type="file" name="images[]" multiple />
-        <input type="submit" />
+        
+        <input type="file" name="images[]" accept=".jpg, .jpeg, .png" multiple />
+        <input type="submit" value="Envoyer"/>
       </form>
     </fieldset>
 
     <p id="text_info">
-      Toutes les dimensions sont dans le fichier Excel :
-      "Config.xlsx". <br />
       Le PDF avec les visuels est enregistré à la date du jour.<br />
-      Vérifier que le nom du visuel correspond à la procédure.
+      Vérifier que les images sont en jpg.<br />
+      (Auquel cas, elles ne seront pas accepté)
     </p>
-  </div>
-  <footer>
-    <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
-  </footer>
 
+  <footer>
+    <p>Tous droits reservés - Thomas Holley </p>
+  </footer>
+</div>
 
 </body>
 

@@ -18,10 +18,6 @@ $sheet->setCellValue('D' . $row, $_POST['Largeur']);
 
 $writer = new Xlsx($spreadsheet);
 $writer->save('Config.xlsx');
-
-
-
-echo ("Nouveau modèle Ajouter au fichier");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,12 +26,12 @@ echo ("Nouveau modèle Ajouter au fichier");
     <title>Dealer De Coque - Redimensionnement Images</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="master_css.css" />
+    <meta http-equiv="refresh" content="2; url=AddPhone.html" />
 </head>
 
-<button id="Button_visualiser" onclick="location.href='Index.html'"" type=" button">
-    Page d'acceuil</button>
-<button id="Button_visualiser" onclick="location.href='AddPhone.html'"" type=" button">
-    Ajouter un Appareil</button>
+<body >
+<h1 id="Message_AddSuccess">Modèle ajouté avec succée</h1>
 </body>
 
 </html>
