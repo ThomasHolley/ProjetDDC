@@ -27,7 +27,7 @@
 
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 <fieldset id="form_upload">
-        <form action="test.php" id="form">
+        <form action="Redim.php" id="form">
             <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button><br>
             <span id="span_txt" style="display:none;"><img src="Iphoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
         </form>

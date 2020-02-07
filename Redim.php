@@ -16,27 +16,28 @@ $files = glob($dir, GLOB_BRACE);
 $pdf = new PDF_Code39('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 $pdf->SetCompression(0);
 
-$i = 2; // i commence à la deuxième ligne du tableau excel
-while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
-    $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule B
-
-    foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
-        $img = $dir;
-        $img = strtoupper($img); // Met le nom des images en majuscules
-        $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
-        $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
-        $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC   
-        $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
-        $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
-        $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
-        $tab = array();
+$i = 2;
+foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
+    $img = $dir;
+    $img = strtoupper($img); // Met le nom des images en majuscules
+    $size = getimagesize($img);    //Ajout de la taille du fichier à la variable "size"
+    $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
+    $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC   
+    $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
+    $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
+    $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
+    $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
+    for ($row = 2; $row <= $highestRow; ++$row) {
+        $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $row)->getValue();
+        $y = $spreadsheet->getActiveSheet()->getCell('C' . $row)->getValue();
+        $x = $spreadsheet->getActiveSheet()->getCell('D' . $row)->getValue();
 
         ////////////////////////////////////////////////////////////////////////////////////// Redimensionnement des MUG /////////////////////////////////////////////////////////////////////////
 
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
             if ($telephone == 'MUG') {
-                $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+               /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+                $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                 $YPX = $y * 12.5; //Calcul du ratio MUG
                 $XPX = $x * 11; //Calcul du ratio
                 $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -54,19 +55,19 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
                 $pdf->AddPage();
                 $pdf->SetFont('Arial', '', 20); // Paramètrage de la police d'écriture
                 $pdf->SetTextColor(107, 107, 71);
-                $pdf->Image($img,0,0,30,60);
+                $pdf->Image($img, 0, 0, 30, 60);
                 $pdf->Text(15, 130, $part[0]); // Ajout du CLIENT
                 $pdf->Text(40, 130, $part[2]); // Ajout MODELE DE TELEPHONE
                 $pdf->Code39(25, 100, $part[1]); // Ajout d'un code bar du numéro du produit.
             } //EndIfMUG
-            array_push($tab,$img);
+
             //////////////////////////////////////////////////////////////////////////// Redimensionnement des Coques ///////////////////////////////////////////////////////
 
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                 if ($telephone != 'MUG') {
                     if ($telephone != "POPSOCKET") {
-                        $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+                       /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                         $YPX = $y * 14; //Calcul du ratio Tel
                         $XPX = $x * 14; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -93,13 +94,13 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 
                     } //EndIfNotPOP
                 } //EndIfNotMUG
-                array_push($tab,$img);
+
                 ////////////////////////////////////////////////////////////////////////// Redimensionnement des POP ///////////////////////////////////////////////////////////
 
                 if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                     if ($telephone == 'POPSOCKET') {
-                        $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D
+                       /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
+                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                         $YPX = $y * 12.5; //Calcul du ratio POP
                         $XPX = $x * 12.5; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -134,7 +135,7 @@ while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant q
 } //EndWhile
 
 
-sort($tab);
+
 $pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 
