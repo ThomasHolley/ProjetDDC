@@ -24,15 +24,18 @@
             <img id="logo" src="ddc_logo.jpg" alt="Logo Dealer De Coque" />
             <!-- Logo de Dealer De Coque -->
         </header>
-
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-<fieldset id="form_upload">
-        <form action="Redim.php" id="form">
-            <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button><br>
+
+        <fieldset id="form_upload">
+            <form action="Redim.php" id="form">
+                <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button>
+            </form> <br>
+            <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button><br>
             <span id="span_txt" style="display:none;"><img src="Iphoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
-        </form>
+
         </fieldset>
-        <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button>
+
+
     </div>
     <footer>
         <p>Tous droits reservés - Thomas Hg - Dealer De Coque</p>
