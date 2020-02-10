@@ -8,7 +8,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 ///////////////////////////////////////////////////////////////// Déclaration de Variables /////////////////////////////////////////////
 
-$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
+$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('EXEMPLE.xlsx'); //Initialisation du chargement du fichier Excel
 $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE);
@@ -26,7 +26,6 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
     $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
     $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
     $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
-
     $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
     for ($row = 2; $row <= $highestRow; ++$row) {
         $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $row)->getValue();
@@ -84,7 +83,8 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
-                        $pdf->Text(13, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+                        $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
+                        $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 
@@ -114,7 +114,8 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
-                        $pdf->Text(13, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+                        $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
+                        $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 
@@ -129,7 +130,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
 
 
-$pdf->Output('Commandes du ' . date("d.m.y") . ' de ' . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 
 

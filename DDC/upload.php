@@ -27,7 +27,7 @@
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
         <fieldset id="form_upload">
-            <form action="Redim.php" id="form">
+            <form action="Resize.php" id="form">
                 <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button>
             </form> <br>
             <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button><br>

@@ -11,17 +11,14 @@
 
 <body>
 
-
-
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="DisplaySize.phpphp">Dimensions</a>
+    <a href="DisplaySize.php">Dimensions</a>
     <a href="AddPhone.html">Ajouter un modèle</a>
     <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
     <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
   </div>
   </div>
-
 
   <div id="main">
     <header>
@@ -35,9 +32,9 @@
     <fieldset>
       <h1>Redimensionnement des Images</h1>
       <form action="upload.php" method="POST" multipart="" enctype="multipart/form-data">
-        
+
         <input type="file" name="images[]" accept=".jpg, .jpeg, .png" multiple />
-        <input type="submit" value="Envoyer"/>
+        <input type="submit" value="Envoyer" />
       </form>
     </fieldset>
 
@@ -47,10 +44,10 @@
       (Auquel cas, elles ne seront pas accepté)
     </p>
 
-  <footer>
-    <p>Tous droits reservés - Thomas Holley </p>
-  </footer>
-</div>
+    <footer>
+      <p>Tous droits reservés - Thomas Holley </p>
+    </footer>
+  </div>
 
 </body>
 
@@ -66,4 +63,6 @@
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
+
+
 </script>
