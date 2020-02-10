@@ -26,6 +26,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
     $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
     $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
     $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
+
     $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
     for ($row = 2; $row <= $highestRow; ++$row) {
         $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $row)->getValue();
@@ -36,8 +37,6 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
         if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
             if ($telephone == 'MUG') {
-               /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                 $YPX = $y * 12.5; //Calcul du ratio MUG
                 $XPX = $x * 11; //Calcul du ratio
                 $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -66,8 +65,6 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
             if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                 if ($telephone != 'MUG') {
                     if ($telephone != "POPSOCKET") {
-                       /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                         $YPX = $y * 14; //Calcul du ratio Tel
                         $XPX = $x * 14; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -98,8 +95,6 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
                 if ($part[2] == $telephone) { // si segment 2 du nom = Cellule B du tableau alors x et y prennent pour valeur C et D
                     if ($telephone == 'POPSOCKET') {
-                       /* $y = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule C
-                        $x = $spreadsheet->getActiveSheet()->getCell('D' . $i)->getValue(); //La variale largeur prend pour valeur la cellule D*/
                         $YPX = $y * 12.5; //Calcul du ratio POP
                         $XPX = $x * 12.5; //Calcul du ratio
                         $pdf->AddPage(); //Ajout d'une page sur le PDF
@@ -134,7 +129,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
 
 
-$pdf->Output('Commandes du ' . date("d.m.y") . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . ' de ' . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 
 
