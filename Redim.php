@@ -87,8 +87,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
-                        $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
-                        $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+                        $pdf->Text(13, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 
@@ -120,8 +119,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
-                        $pdf->Text(13, 238, $part[1]); // Ajout du NUMERO DE COMMANDE
-                        $pdf->Text(28, 238, $part[2]); // Ajout MODELE DE TELEPHONE
+                        $pdf->Text(13, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
                         $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
 

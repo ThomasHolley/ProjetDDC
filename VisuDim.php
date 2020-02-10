@@ -27,6 +27,7 @@
     </header>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    <br><input type="button" style= "display :block; margin:auto" value="Telecharger le fichier Excel" onClick="window.location.href='Config.xlsx'"><br>
     <!------------------------------------------- PHP -------------------------------------------------------------------------->
     <?php
     require 'vendor/autoload.php';
@@ -36,10 +37,11 @@
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
     $spreadsheet->setActiveSheetIndex(0);
 
+
     echo "<table border=1>";
     $i = 1; // i commence à la deuxième ligne du tableau excel
     while ($spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue()) { //Tant que la page excel est chargé, on garde en variable les valeurs des cellules.
-      $spreadsheet->getActiveSheet()->getStyle('B'.$i)
+      $spreadsheet->getActiveSheet()->getStyle('B' . $i)
         ->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
       $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $i)->getValue(); //La variable telephone prend pour valeur la cellule A
       $hauteur = $spreadsheet->getActiveSheet()->getCell('C' . $i)->getValue(); //La variable hauteur prend pour valeur la cellule B
@@ -56,12 +58,9 @@
     }
 
     echo "</table>";
-
     ?>
     <!---------------------------------------------------------------------------------------------------------------------------------->
   </div>
-
-
 </body>
 
 </html>

@@ -128,12 +128,13 @@ footer {
   color: white;
 }
 
-#tab {
-  margin: auto;
+table
+{
+margin: auto;
 }
 tr {
   color: white;
-  background-color: grey;
+  background-color: #2b2b2a;
   text-align: center;
 }
 td {

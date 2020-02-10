@@ -12,7 +12,7 @@ $sheet = $spreadsheet->getActiveSheet(0); //La feuille de travail Excel "0" est 
 $row = $sheet->getHighestDataRow() + 1;
 
 $sheet->insertNewRowBefore($row, 1);
-$sheet->setCellValue('B' . $row, $_POST['telephone']);
+$sheet->setCellValue('B' . $row, $_POST['Marque'].$_POST['telephone']);
 $sheet->setCellValue('C' . $row, $_POST['Hauteur']);
 $sheet->setCellValue('D' . $row, $_POST['Largeur']);
 

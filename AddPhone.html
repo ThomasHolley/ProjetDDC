@@ -21,15 +21,13 @@
   </div>
 
   <div id="main">
-    <h1>Ajouter Un Modèle de Téléphone</h1>
-
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
     <fieldset id="Form_AddPhone">
-
+      <h1>Ajouter Un Modèle de Téléphone</h1>
       <form action="ModifExcel.php" method="POST">
         <select name="Marque">
-          <option value="">----Marque----</option>
+          <option value="">MARQUE</option>
           <option value="ARCHOS">Archos</option>
           <option value="ALCATEL">Alcatel</option>
           <option value="ASUS">Asus</option>
@@ -50,7 +48,7 @@
           <option value="ONEPLUS">OnePlus</option>
           <option value="POLAROID">Polaroid</option>
           <option value="RAZER">Razer</option>
-          <option value="GALAXY">Samsung</option>
+          <option value="SAMSUNG">Samsung</option>
           <option value="XPERIA">Sony</option>
           <option value="VIVO">Vivo</option>
           <option value="WIKO">Wiko</option>
@@ -59,30 +57,28 @@
           <option value="ZTE">ZTE</option>
         </select>
 
-        Téléphone:
-        <input type="text" id="modeleTel" name="telephone" onchange="myFunction()"/>
 
-        Hauteur :
-        <input type="text" name="Hauteur" />
+        <input type="text" id="modeleTel" name="telephone" onchange="myFunction()" placeholder="Téléphone" required />
 
-        Largeur :
-        <input type="text" name="Largeur" />
+        <input type="text" name="Hauteur" placeholder="Hauteur" required />
+
+        <input type="text" name="Largeur" placeholder="Largeur" required />
         <br /><br />
 
-        <input type="submit" value="Envoyer"/>
+        <input type="submit" value="Envoyer" />
       </form>
     </fieldset>
 
 
-  <p id="Info_AddPhone">
-    La Hauteur et la largeur sont en mm.<br />
-    Le téléphone sera ajouté à la fin du fichier Excel.
-  </p>
+    <p id="Info_AddPhone">
+      La Hauteur et la Largeur sont en mm. (15 cm -> 150 mm)<br />
+      Le téléphone sera ajouté à la fin du fichier Excel.
+    </p>
 
-  <footer>
-    <p>Tous droits reservés - Thomas Holley</p>
-  </footer>
-</div>
+    <footer>
+      <p>Tous droits reservés - Thomas Holley</p>
+    </footer>
+  </div>
 </body>
 
 </html>
@@ -98,7 +94,7 @@
     document.getElementById("main").style.marginLeft = "0";
   }
   function myFunction() {
-  var x = document.getElementById("modeleTel");
-  x.value = x.value.toUpperCase();
-}
+    var x = document.getElementById("modeleTel");
+    x.value = x.value.toUpperCase();
+  }
 </script>
