@@ -86,7 +86,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
                         $pdf->Text(13, 238, $part[2]); // Ajout MODELE DE TELEPHONE
                         $pdf->Text(80, 238, $part[3]); // Ajout de la MATIERE DE TELEPHONE
-                        $pdf->Code39(30, 205, $part[1]); // Ajout d'un code bar du numéro du produit.
+                        $pdf->Code39(3, 205, $part[1],  1, 50,); // Ajout d'un code bar du numéro du produit.
 
                     } //EndIfNotPOP
                 } //EndIfNotMUG
@@ -127,7 +127,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
 
 
-$pdf->Output('Commandes du ' . date("d.m.y") . ' de ' . $part[0] . '.pdf', 'I'); // Enregistrement du PDF avec pour nom la date du jour
+$pdf->Output('Commandes du ' . date("d.m.y") . ' de ' . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
 
 
 

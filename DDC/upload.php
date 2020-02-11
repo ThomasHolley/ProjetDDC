@@ -38,7 +38,9 @@
 
 
     <footer>
-        <p>Tous droits reservés - Thomas Holley</p>
+    <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
+        <a href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
+
     </footer>
     </div>
 </body>
