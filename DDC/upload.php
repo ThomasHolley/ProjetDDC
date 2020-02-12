@@ -21,7 +21,7 @@
 
     <div id="main">
         <header>
-            <img id="logo" src="ddc_logo.jpg" alt="Logo Dealer De Coque" />
+        <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
             <!-- Logo de Dealer De Coque -->
         </header>
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
@@ -31,7 +31,7 @@
                 <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button>
             </form> <br>
             <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button><br>
-            <span id="span_txt" style="display:none;"><img src="Iphoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
+            <span id="span_txt" style="display:none;"><img src="Images/iPhoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
 
         </fieldset>
 
@@ -39,7 +39,7 @@
 
     <footer>
     <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
-        <a href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
+    <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
 
     </footer>
     </div>
@@ -69,6 +69,8 @@
 </script>
 <!--------------------------------------------- PHP ------------------------------------------------------------------------->
 <?php
+
+
 
 extract($_POST);
 $error = array();

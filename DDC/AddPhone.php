@@ -1,4 +1,7 @@
 <?php
+
+
+
 require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -31,7 +34,7 @@ $writer->save('Config.xlsx');
 </head>
 
 <body >
-<h1 id="Message_AddSuccess">Modèle ajouté avec succée</h1>
+<h1 id="Message_AddSuccess">Modèle ajouté avec succès</h1>
 </body>
 
 </html>

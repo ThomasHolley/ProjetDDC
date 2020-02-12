@@ -8,6 +8,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 ///////////////////////////////////////////////////////////////// Déclaration de Variables /////////////////////////////////////////////
 
+
 $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
 $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
 $dir = 'Visuel/*';  //Chemin où ce trouve les visuels
@@ -49,6 +50,14 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         imageflip($img_dest, IMG_FLIP_HORIZONTAL);
                         imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                     } //EndIfImage
+                    elseif($size['mime'] == 'image/png') { # Images en JPEG
+                        $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
+                        $img_dest = imagecreatetruecolor($XPX, $YPX);
+                        imageresolution($img_dest, 300, 300);
+                        imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                        imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                        imagepng($img_dest, $img, 9); // L'image est sauvegardé en JPEG avec une qualité de 100
+                    } //EndIfImage
                 } //EndInfSize
                 $pdf->Image($img, 5, 8); //Ajout de l'image sur le PDF
                 $pdf->AddPage();
@@ -81,6 +90,14 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                             } //EndIfImage
+                            elseif($size['mime'] == 'image/png') { # Images en PNG
+                                $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
+                                $img_dest = imagecreatetruecolor($XPX, $YPX);
+                                imageresolution($img_dest, 300, 300);
+                                imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                                imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                                imagepng($img_dest, $img, 9); // L'image est sauvegardé en PNG avec une qualité de 100
+                            } //EndIfImage
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF
                         $pdf->Text(5, 238, $part[0]); // Ajout du CLIENT
@@ -110,6 +127,14 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                                 $color = imagecolorallocate($img_dest, 107, 107, 71);
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
+                            } //EndIfImage
+                            elseif($size['mime'] == 'image/png') { # Images en PNG
+                                $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
+                                $img_dest = imagecreatetruecolor($XPX, $YPX);
+                                imageresolution($img_dest, 300, 300);
+                                imagecopyresampled($img_dest, $img_source, 0, 0, 0, 0, $XPX, $YPX, $size[0], $size[1]); //l'image est redimensionné
+                                imageflip($img_dest, IMG_FLIP_HORIZONTAL);
+                                imagepng($img_dest, $img, 9); // L'image est sauvegardé en PNG avec une qualité de 100
                             } //EndIfImage
                         } //EndIfSize
                         $pdf->Image($img); //Ajout de l'image sur le PDF

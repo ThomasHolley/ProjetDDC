@@ -1,4 +1,4 @@
-AuthName "Page d'administration protégée"
+AuthName "Page d'administration protegee"
 AuthType Basic
-AuthUserFile "C:\xampp\htdocs\projetDDC\DDC\.htpasswd"
+AuthUserFile "C:\xampp\htdocs\ProjetDDC\DDC\.htpasswd"
 Require valid-user

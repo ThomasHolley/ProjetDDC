@@ -21,18 +21,18 @@
 
   <div id="main">
     <header>
-      <img id="logo" src="ddc_logo.jpg" alt="Logo Dealer De Coque" />
+    <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
       <!-- Logo de Dealer De Coque -->
 
     </header>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
     <br><input type="button" style= "display :block; margin:auto" value="Telecharger le fichier Excel" onClick="window.location.href='Config.xlsx'"><br>
-    
-    <form action="DeletePhone.php" method="POST">
+
+    <!--<form action="DeletePhone.php" method="POST">
     <input type="text" name="Modele" placeholder="Modele" required />
         <input type="submit" value="Envoyer" />
-    </form>
+    </form>-->
 
     <!------------------------------------------- PHP -------------------------------------------------------------------------->
     <?php
