@@ -26,11 +26,11 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
     $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
     $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
-    $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
-    for ($row = 2; $row <= $highestRow; ++$row) {
-        $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $row)->getValue();
-        $y = $spreadsheet->getActiveSheet()->getCell('C' . $row)->getValue();
-        $x = $spreadsheet->getActiveSheet()->getCell('D' . $row)->getValue();
+    $highestRow = $spreadsheet->getActiveSheet()->getHighestRow(); //La variable prend pour valeur la derniere ligne contenant des données
+    for ($row = 2; $row <= $highestRow; ++$row) { // Pour chaque ligne de la N°2 à la plus grand 
+        $telephone = $spreadsheet->getActiveSheet()->getCell('B' . $row)->getValue(); // La variable prend pour valeur la donnée de la cellule B
+        $y = $spreadsheet->getActiveSheet()->getCell('C' . $row)->getValue();// La variable prend pour valeur la donnée de la cellule C
+        $x = $spreadsheet->getActiveSheet()->getCell('D' . $row)->getValue();// La variable prend pour valeur la donnée de la cellule D
 
         ////////////////////////////////////////////////////////////////////////////////////// Redimensionnement des MUG /////////////////////////////////////////////////////////////////////////
 
@@ -151,8 +151,6 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
 
 
 $pdf->Output('Commandes du ' . date("d.m.y") . ' de ' . $part[0] . '.pdf', 'D'); // Enregistrement du PDF avec pour nom la date du jour
-
-
 
 ///////////////////// Supprime les fichiers du dossier Visuel ///////////////////////////////
 $path = 'Visuel/'; //ne pas oublier le slash final

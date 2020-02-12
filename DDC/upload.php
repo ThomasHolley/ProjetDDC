@@ -3,6 +3,7 @@
 
 <head>
     <title>Dealer De Coque - Redimensionnement Images</title>
+    <link rel="icon" type="image/ico" href="Images/ddc_logo.jpg" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="master_css.css" />
@@ -36,8 +37,6 @@
             <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button><br>
             <span id="span_txt" style="display:none;"><img src="Images/iPhoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
         </fieldset>
-
-
 
         <footer>
             <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
