@@ -11,6 +11,7 @@
 
 <body>
     <div id="mySidenav" class="sidenav">
+        <!-- Menu de Navigation -->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="Index.html">Accueil</a>
         <a href="AddPhone.html">Ajouter un modèle</a>
@@ -20,33 +21,34 @@
     </div>
 
     <div id="main">
+        <!-- Div pour transition -->
         <header>
-        <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
+            <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
             <!-- Logo de Dealer De Coque -->
         </header>
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span> <!-- Ouvrir le menu de navigation -->
 
         <fieldset id="form_upload">
+            <!-- Mise en fonctionnement du PHP de redimensionnement -->
             <form action="Resize.php" id="form">
                 <button class="myButton" type="submit" onclick="toggle_text()">Redimensionner</button>
             </form> <br>
             <button class="myButton" onclick="window.location.href='Index.html'">Ajouter des Visuels supplémentaires</button><br>
             <span id="span_txt" style="display:none;"><img src="Images/iPhoneload.gif" style="width: 50px; height:50px; margin:2%"></span>
-
         </fieldset>
 
 
 
-    <footer>
-    <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
-    <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
+        <footer>
+            <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
+            <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
 
-    </footer>
+        </footer>
     </div>
 </body>
 
 </html>
-<!--------------------------------------------- SCRIPT -------------------------------------------------------------------------->
+<!--------------------------------------------- SCRIPT de menu de navigation et d'apparition du GIF-------------------------------------------------------------------------->
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -67,11 +69,8 @@
         }
     }
 </script>
-<!--------------------------------------------- PHP ------------------------------------------------------------------------->
+<!--------------------------------------------- PHP pour l'envoie des visuels vers le php de redimensionnement------------------------------------------------------------------------->
 <?php
-
-
-
 extract($_POST);
 $error = array();
 $extension = array("jpeg", "jpg", "png", "gif");

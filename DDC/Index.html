@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+  <!-- Menu de Navigation -->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="DisplaySize.php">Dimensions</a>
@@ -21,39 +21,42 @@
   </div>
 
   <div id="main">
+    <!-- Div pour transition -->
     <header>
       <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
       <!-- Logo de Dealer De Coque -->
-
     </header>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    <!-- Ouvrir le menu de navigation -->
 
     <fieldset>
       <h1>Redimensionnement des Images</h1>
       <form action="upload.php" method="POST" multipart="" enctype="multipart/form-data">
-
+        <!-- Form d'upload des visuels -->
         <input type="file" name="images[]" accept=".jpg, .jpeg, .png" multiple />
         <input type="submit" value="Envoyer" />
       </form>
     </fieldset>
 
     <p id="text_info">
+      <!-- Informations sur les visuels -->
       Le PDF avec les visuels est enregistré à la date du jour et avec le nom du Client.<br />
-      Vérifier que les images sont en JPG  ou PNG.<br />
+      Vérifier que les images sont en JPG ou PNG.<br />
       (Auquel cas, elles ne seront pas accepté)
     </p>
 
     <footer>
       <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
-      <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
+      <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions
+        D'utilisation</a>
     </footer>
   </div>
 
 </body>
 
 </html>
-<!------------------------------------------------ SCRIPT -------------------------------------------------------------------->
+<!------------------------------------------------ SCRIPT pour le menu de navigation -------------------------------------------------------------------->
 <script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -64,6 +67,4 @@
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
-
-
 </script>

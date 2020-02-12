@@ -4,10 +4,8 @@
 require 'vendor/autoload.php';
 require('code39.php');
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 ///////////////////////////////////////////////////////////////// Déclaration de Variables /////////////////////////////////////////////
-
 
 $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
 $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
@@ -50,7 +48,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                         imageflip($img_dest, IMG_FLIP_HORIZONTAL);
                         imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                     } //EndIfImage
-                    elseif($size['mime'] == 'image/png') { # Images en JPEG
+                    elseif ($size['mime'] == 'image/png') { # Images en JPEG
                         $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
                         $img_dest = imagecreatetruecolor($XPX, $YPX);
                         imageresolution($img_dest, 300, 300);
@@ -66,7 +64,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                 $pdf->Image($img, 0, 0, 30, 60);
                 $pdf->Text(15, 130, $part[0]); // Ajout du CLIENT
                 $pdf->Text(40, 130, $part[2]); // Ajout MODELE DE TELEPHONE
-                $pdf->Code39(25, 100, $part[1]); // Ajout d'un code bar du numéro du produit.
+                $pdf->Code39(2, 100, $part[1]); // Ajout d'un code bar du numéro du produit.
             } //EndIfMUG
 
             //////////////////////////////////////////////////////////////////////////// Redimensionnement des Coques ///////////////////////////////////////////////////////
@@ -90,7 +88,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                             } //EndIfImage
-                            elseif($size['mime'] == 'image/png') { # Images en PNG
+                            elseif ($size['mime'] == 'image/png') { # Images en PNG
                                 $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
                                 $img_dest = imagecreatetruecolor($XPX, $YPX);
                                 imageresolution($img_dest, 300, 300);
@@ -128,7 +126,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
                                 drawBorder($img_dest, $color, 3);
                                 imagejpeg($img_dest, $img, 100); // L'image est sauvegardé en JPEG avec une qualité de 100
                             } //EndIfImage
-                            elseif($size['mime'] == 'image/png') { # Images en PNG
+                            elseif ($size['mime'] == 'image/png') { # Images en PNG
                                 $img_source = imagecreatefrompng($img); # On ouvre l'image d'origine
                                 $img_dest = imagecreatetruecolor($XPX, $YPX);
                                 imageresolution($img_dest, 300, 300);

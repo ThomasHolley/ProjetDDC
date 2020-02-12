@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+  <!-- Menu de Navigation -->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="Index.html">Accueil</a>
@@ -21,14 +21,18 @@
   </div>
 
   <div id="main">
-    <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" />
+    <!-- Div pour transition -->
+    <img id="logo" src="Images/ddc_logo.jpg" alt="Logo Dealer De Coque" /> <!-- Logo de Dealer De Coque -->
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+    <!-- Ouvrir le menu de navigation -->
 
     <fieldset id="Form_AddPhone">
       <h1>Ajouter Un Modèle de Téléphone</h1>
       <form action="AddPhone.php" method="POST">
+        <!-- Form pour l'ajout de nouveaux téléphones -->
         <select name="Marque">
+          <!-- DropBox pour le choix du constructeur -->
           <option value="">MARQUE</option>
           <option value="ARCHOS">Archos</option>
           <option value="ALCATEL">Alcatel</option>
@@ -59,7 +63,7 @@
           <option value="ZTE">ZTE</option>
         </select>
 
-
+        <!-- TextBox pour le nom du téléphone, Hauteur et Largeur -->
         <input type="text" id="modeleTel" name="telephone" onchange="myFunction()" placeholder="Téléphone" required />
 
         <input type="text" name="Hauteur" placeholder="Hauteur" required />
@@ -73,13 +77,15 @@
 
 
     <p id="Info_AddPhone">
+      <!-- Informations sur l'ajout d'un téléphone -->
       La Hauteur et la Largeur sont en mm. (15 cm -> 150 mm)<br />
       Le téléphone sera ajouté à la fin du fichier Excel.
     </p>
 
     <footer>
       <p>Tous droits reservés - Thomas Holley & DealerDeCoque 2019</p>
-      <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions D'utilisation</a>
+      <a id="Lien_CU" href="https://www.dealerdecoque.fr/fr/content/3-conditions-generales-de-ventes">Conditions
+        D'utilisation</a>
     </footer>
   </div>
 </body>
@@ -87,7 +93,7 @@
 </html>
 <!-------------------------------------------- SCRIPT ---------------------------------------------------------------------->
 <script>
-  function openNav() {
+  function openNav() {//Menu de navigation
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
   }
@@ -96,7 +102,7 @@
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
   }
-  function myFunction() {
+  function myFunction() {//Texte dans la TextBox du modele de téléphone en Majuscule
     var x = document.getElementById("modeleTel");
     x.value = x.value.toUpperCase();
   }
