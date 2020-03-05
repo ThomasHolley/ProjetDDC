@@ -1,4 +1,5 @@
-AuthName "Page d'administration protegee"
+AuthUserFile C:\xampp\htdocs\ProjetDDC\DDC\.htpasswd
+AuthGroupFile /dev/null
+AuthName "Accès Restreint"
 AuthType Basic
-AuthUserFile "C:\xampp\htdocs\ProjetDDC\DDC\.htpasswd"
-Require valid-user
+require valid-user

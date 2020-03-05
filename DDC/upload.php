@@ -18,6 +18,7 @@
         <a href="AddPhone.html">Ajouter un modèle</a>
         <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
         <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
+        <a href="admin.html">Admin</a>
     </div>
     </div>
 

@@ -14,11 +14,11 @@
   <!-- Menu de Navigation -->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="Index.html">Accueil</a>
     <a href="DisplaySize.php">Dimensions</a>
     <a href="AddPhone.html">Ajouter un modèle</a>
     <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
-    <a href="mailto:$blockcontactinfos_email?subject=Site De Redimensionnement">Contact</a>
-    <a href="admin.html">Admin</a>
+    <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
   </div>
   </div>
 
@@ -31,22 +31,13 @@
     <!-- Ouvrir le menu de navigation -->
     </header>
 
-
-
-    <fieldset>
-      <h1>Redimensionnement des Images</h1>
-      <form action="upload.php" method="POST" multipart="" enctype="multipart/form-data">
-        <!-- Form d'upload des visuels -->
-        <input type="file" name="images[]" accept=".jpg, .jpeg, .png" multiple />
-        <input type="submit" value="Envoyer" />
-      </form>
-    </fieldset>
-
     <p id="text_info">
-      <!-- Informations sur les visuels -->
-      Le PDF avec les visuels est enregistré à la date du jour et avec le nom du Client.<br />
-      Vérifier que les images sont en JPG ou PNG.<br />
-      (Auquel cas, elles ne seront pas accepté)
+      <!-- Informations -->
+      Le site à besoin de PHP en version 7.1 ou suppérieur. (7.4 de préférence)<br>
+      Si le site est déplacé sur un nouveau serveur, penser à modifier dans le php.ini <br>
+      max_execution_time:	600000 / max_file_uploads:	500 /  post_max_size :	1G
+    
+
     </p>
 
     <footer>

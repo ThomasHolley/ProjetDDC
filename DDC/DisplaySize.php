@@ -18,6 +18,7 @@
     <a href="AddPhone.html">Ajouter un modèle</a>
     <a href="https://www.dealerdecoque.fr/fr/">Boutique</a>
     <a href="mailto:pokeway872@repshop.net?subject=Site De Redimensionnement">Contact</a>
+    <a href="admin.html">Admin</a>
   </div>
   </div>
 
@@ -31,11 +32,11 @@
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span> <!-- Ouvrir le menu de navigation -->
     <br><input type="button" style="display :block; margin:auto" value="Telecharger le fichier Excel" onClick="window.location.href='Config.xlsx'"><br> <!-- Bouton de téléchargement du Excel -->
 
-    <form action="DeletePhone.php" method="POST">
-      <!-- Form de suppression d'un modèle de Téléphone -->
+    <!-- <form action="DeletePhone.php" method="POST">
+      Form de suppression d'un modèle de Téléphone
       <input type="text" name="Modele" placeholder="Modele à supprimer..." required />
       <input type="submit" value="Envoyer" />
-    </form>
+    </form> -->
 
     <!------------------------------------------- PHP -------------------------------------------------------------------------->
     <?php

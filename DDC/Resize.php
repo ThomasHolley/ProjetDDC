@@ -9,11 +9,12 @@ require('code39.php');
 
 $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('Config.xlsx'); //Initialisation du chargement du fichier Excel
 $spreadsheet->setActiveSheetIndex(0); //La feuille de travail Excel "0" est chargé
-$dir = 'Visuel/*';  //Chemin où ce trouve les visuels
+$dir = 'Visuel/*.jpg';  //Chemin où ce trouve les visuels
 $files = glob($dir, GLOB_BRACE);
 
 $pdf = new PDF_Code39('p', 'mm', array(100, 240)); //creation d'un nouveau pdf avec code bar
 $pdf->SetCompression(0);
+
 
 $i = 2;
 foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
@@ -23,6 +24,7 @@ foreach ($files as $dir) { //Boucle sur chaque fichiers du dossier
     $newtext = substr($img, 7); //Découpe le chemin et le nom des fichiers pour séléctionner uniquement le nom du fichier
     $newtext = str_replace("MC ", "MC-", "$newtext"); //Ajoute un - après MC   
     $newtext = str_replace("MUG", "MUG-", "$newtext"); //Ajoute un - après MC      
+    $newtext = str_replace("+", "plus", "$newtext"); //Ajoute un - après MC      
     $newtext = str_replace(" ", "", "$newtext"); // Supprime l'espace dans le nom des images
     $part = explode('-', $newtext); // Découpage du nom de l'image par des "-"
 
